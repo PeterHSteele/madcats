@@ -501,6 +501,10 @@ footer svg{
 	z-index:10;
 }
 
+ ul.table-of-contents .sublist{
+		
+}
+
 ul.table-of-contents a {
 	color:var(--mediumLightGray);
 }
@@ -518,15 +522,8 @@ section.longform+footer{
 	margin-left: 25%;
 }
 
-header.large-screen-header.longform-header,
-header.large-screen-header.longform-header p
-{
-	color:white;
-}
 
-.large-screen-header.longform-header ul.table-of-contents li a{
-	color:red!important;
-}
+
 
 
 
