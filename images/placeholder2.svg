@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="125" version="1.1">
+	<rect width="250" height="125" x="0" y="0" fill="#DDD"></rect>
+	<polygon points="40,20 10,80 70,80 40,20" fill="pink"/>
+	<polygon points="210,20 180,80 240,80 210,20" fill="orange"/>
+</svg>
