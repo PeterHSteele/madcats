@@ -26,8 +26,8 @@ function madcats_scripts(){
 	//enqueue script to allow toggling of modal
 	wp_enqueue_script('toggle_modal',get_template_directory_uri().'/js/toggleModal.js',array('jquery'));
 
-	//enqueue script giving headings on longfrom pages id attributes so they can be navigated
-	//wp_enqueue_script('add_ids_to_headings',get_template_directory_uri().'/js/addIdsToHeadings.js',array('jquery'));
+	//enqueue script giving headings on longform pages id attributes so they can be navigated
+	wp_enqueue_script('add_ids_to_headings',get_template_directory_uri().'/js/addIdsToHeadings.js',array('jquery'));
 
 }
 
