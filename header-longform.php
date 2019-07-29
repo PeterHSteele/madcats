@@ -94,31 +94,43 @@
 				
 			
 			} else if ( $intHeadingType > $lvl) {
+
+				$length = sizeof($arr);
+				$last = $arr[$length-1];
+
+				//print_r($last);
 				
-				$subheadings = array();
-
-				array_push( $subheadings, $heading);
+				$subheadings = findHeadings($lvl+1,$text,array());
 				
-				array_push( $arr, $subheadings);
+				array_push( $arr, $subheadings[0]);
 
-				$remainder = truncateString( $tagName, $text, $headingLengthWithTags);
+				$remainder = $subheadings[1];
 
-				return findHeadings( $lvl+1, $remainder, $arr);
+				return findHeadings($lvl,$remainder,$arr);
+
 			} else {
-				return findHeadings( $lvl-1, $text, $arr);
+				return array($arr, $text);
 			}
 		}
 
-		//print_r(strlen('<h2>bulls</h2>')-9);
+		//findHeadings(2,'<h2>bulls</h2><h3>kings</h3><h4>nets</h4><h2>lakers</h2>',array());
+		//print_r(findHeadings(2,'<h2>bulls</h2><h3>kings</h3><h3>nets</h3><h3>lakers</h3><h2>wizards</h2>',array()));
 
 		function printNav( $headings ){
 			$nav = '';
+			$index = -1;
 			foreach ( $headings as $heading ){
-				if ( gettype($heading)==="string" ){
-					$nav.='<li><a href="'.'#'.str_replace(' ','_',$heading).'">'.$heading.'</a>';
+				$hasSubmenu=false;
+				$index+=1;
+				if ( gettype($heading) === "string" ){
+					if ( gettype($headings[$index+1]) === "array" ){
+						$hasSubmenu=true;
+					}
+					$arrow = $hasSubmenu ? 'fa fa-arrow-down' : '';
+					$nav.='<li class="clearfix"><a href="'.'#'.str_replace(' ','_',$heading).'">'.$heading.'</a><i class="'.$arrow.'"></i>';
 				} else {
-					$sublist = '<ul class="sublist">';
-					$lis = printNav($heading);
+					$sublist = '<ul class="sublist no-display">';
+					$lis = printNav( $heading );
 					$sublist.=$lis;
 					$sublist.='</ul>';
 					$nav.=$sublist;
@@ -166,7 +178,7 @@
 		<ul class="table-of-contents">
 			<?php 
 				//print table of contents from the headings array
-				echo printNav($headings); 
+				echo printNav( $headings ); 
 			?>
 		</ul>
 		
