@@ -36,8 +36,8 @@ get_header();
 					
 				?>
 					<div class="main-image">
-						<?php  if ( the_post_thumbnail() ){
-							the_post_thumbnail();
+						<?php  if ( has_post_thumbnail( ) ){
+							the_post_thumbnail( 'large' );
 						}
 						?>
 					</div>

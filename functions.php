@@ -125,6 +125,19 @@ add_action('customize_register','madcats_customize_register');
 
 
 add_theme_support('post-thumbnails');
+
+function madcats_custom_logo_setup(){
+	$defaults = array(
+		'height' => 100,
+		'width'	 => 100,
+		'flex-height' => true,
+		'flex-width'  => true
+	);
+
+	add_theme_support('custom-logo', $defaults);
+}
+
+add_action( 'after_setup_theme', 'madcats_custom_logo_setup');
 /*
 $defaults = array(
     'default-color'          => '',

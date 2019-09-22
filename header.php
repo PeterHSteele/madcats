@@ -16,6 +16,7 @@
 		<!--<i class='fa fa-window-close fa-lg'></i>-->
 	</button>
 </div>
+<div class='container'>
 <header class='small-screen-header'>
 	<ul>
 		<li class="small-screen-header-item">
@@ -36,7 +37,7 @@
 				<?php endif; ?>
 		</li>
 	<?php if (is_active_sidebar('below-nav')) : ?>
-		<li class="small-screen-header-item">
+		<li  id="small-screen-header-search" class="small-screen-header-item">
 			<i class="fa fa-search fa-lg"></i>
 			
 		</li>
@@ -44,6 +45,9 @@
 	</ul>
 </header>
 <header class='large-screen-header'>
+	<?php if ( function_exists( 'the_custom_logo' ) ) {
+		the_custom_logo();
+	} ?>
 	<?php
 	if (has_nav_menu('primary')) : ?>
 		<nav class="main-navigation">

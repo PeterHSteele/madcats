@@ -6,6 +6,12 @@
 	GNU General Public License v2 or later
 */
 
+/*
+
+	make sure media queries look ok
+
+*/
+
 /*colors*/
 :root{
 	--orange:rgb(226,124,34);
@@ -20,6 +26,11 @@
 }
 
 /*elements*/
+html,
+body{
+	height:100%;
+}
+
 html{
 	margin:0;
 }
@@ -27,11 +38,13 @@ html{
 h1{text-align: center}
 
 body{
-	margin:0;
+	margin: 0;
 	font-family: palatino,georgia;
 	font-size: 17px;
 	line-height: 1.2em;
 	position:relative;
+	display:flex;
+	flex-direction:column;
 }
 
 ul{
@@ -64,8 +77,8 @@ body > form{
 }
 
 img{
-	display:block;
-	margin:0 auto;
+	height:auto;
+	max-width: 100%;
 }
 
 article{
@@ -78,7 +91,7 @@ p{
 
 .sr-only{
 	position:absolute;
-	left:-200px;
+	left:-800px;
 }
 
 .no-display{
@@ -125,11 +138,14 @@ input[type=submit]:hover{
 	max-width: 100%;
 }
 
-
-
 /*layout*/
+.container{
+	display:flex;
+	flex-direction:row;
+	flex: 1 0 auto;
+}
+
 .large-screen-header{
-	float:left;
 	width:25%;
 	background:var(--darkGray);
 	/*background:url('./images/placeholder1.svg');*/
@@ -137,6 +153,11 @@ input[type=submit]:hover{
 	display:inline-block;
 	padding:0 5px;
 	font-family: sans-serif;
+	min-height:100%;
+	top:0;
+	left:0;
+	z-index:5;
+	border-right:2px solid var(--orangeLight);
 }
 
 .primary-nav{
@@ -176,9 +197,8 @@ input[type=submit]:hover{
 
 .content-area,
 .site-description{
-	width:75%;
-	box-sizing:border-box;
-	float:left;
+	width: 75%;
+	box-sizing: border-box;
 }
 
 ul.sub-menu{
@@ -207,7 +227,6 @@ li.menu-item-has-children:hover .sub-menu{
 	padding:.5em;
 	color:white;
 	margin-top: 2em;
-	background:var(--darkGray);
 }
 .nav-widgets p{
 	color:white;
@@ -345,18 +364,7 @@ li.menu-item-has-children:hover .sub-menu{
 
 
 
-@media screen and (max-width:900px){
-	body{
-		flex-flow:row wrap;
-	}
-	.large-screen-header{display:none}
-	.small-screen-header{display:block;}
-	.content-area,
-	.site-description{
-		width:100%;
-		margin-left: 0;
-	}
-}
+
 /*Page and Post titles*/
 
 .page-title{
@@ -389,7 +397,6 @@ li.menu-item-has-children:hover .sub-menu{
 
 .main-image img{
 	max-width: 100%;
-	object-fit:cover;
 }
 
 .page-content,
@@ -413,7 +420,6 @@ li.menu-item-has-children:hover .sub-menu{
 }
 
 footer{
-	margin-top: .5em;
 	clear:both;
 	background:var(--veryLightGray);
 	/*background:url('../../uploads/2019/06/daisy-768x594.jpeg');*/
@@ -421,6 +427,7 @@ footer{
 	background-size: cover;
 	background-position: 0 50%;
 	color:white;
+	flex-shrink: 0;
 	/*border-top: 1px dotted var(--mediumLightGray);*/	
 	box-sizing:border-box;
 }
@@ -457,8 +464,7 @@ footer nav li{
 	box-sizing:border-box;
 }
 
-footer nav li a
-{
+footer nav li a{
 	color:white;
 }
 
@@ -483,13 +489,14 @@ footer svg{
 	display:flex;
 	flex-flow:row wrap;
 	justify-content:flex-start;
+	margin-left:25%;
 }
 
 .card{
-	flex-basis: 28%;
+	flex: 1 0 25%;
 	box-shadow: 0 0 6px 3px var(--mediumLightGray);
 	padding:.5em;
-	margin:.5em;
+	margin:2em;
 }
 
 .card img{
@@ -575,6 +582,40 @@ section.longform{
 section.longform,
 section.longform+footer{
 	margin-left: 25%;
+}
+
+/*Annotation container*/
+/*
+.site-main p,
+.site-main h2,
+.site-main h3,
+.site-main h4,
+.site-main figure{
+	width:66.67%;
+}
+
+
+.site-main>*{
+	width:66.67%;
+}
+*/
+/*End annotation container*/
+
+@media screen and (max-width:900px){
+	.large-screen-header{display:none}
+	.small-screen-header{
+		display:block;
+		position:fixed;
+		top:0;
+		left:0;
+	}
+	.content-area,
+	.site-description,
+	section.longform,
+	section.longform+footer{
+		width:100%;
+		margin-left: 0;
+	}
 }
 
 

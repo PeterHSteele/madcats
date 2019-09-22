@@ -13,7 +13,7 @@ jQuery(function($){
 	}
 
 	//toggle the modal when the navbar search icon is clicked
-	$('.small-screen-header-item').click(function(){
+	$('#small-screen-header-search').click(function(){
 		toggleModal(modal);
 	});
 

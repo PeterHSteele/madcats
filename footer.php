@@ -1,3 +1,4 @@
+</div><!--container-->
 <footer>
 	<div class="mask">
 	<?php if (has_nav_menu('footer') ): ?>
