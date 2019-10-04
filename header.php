@@ -3,6 +3,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title><?php wp_title( '&raquo;', true, 'right' ); bloginfo( 'name' )?></title>
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 	<?php wp_head(); ?>
@@ -12,8 +13,7 @@
 <div class="small-screen-modal no-display">
 	<?php get_template_part('searchform'); ?>
 	<button class="modal-close">
-		<span>Close</span>
-		<!--<i class='fa fa-window-close fa-lg'></i>-->
+		Close
 	</button>
 </div>
 <div class='container'>
@@ -55,7 +55,7 @@
 			wp_nav_menu(
 				array(
 					'theme_location'=>'primary',
-					'menu_class'=>'primary-nav'
+					'menu_class'=>'primary-nav',
 				)
 			);
 			?>
