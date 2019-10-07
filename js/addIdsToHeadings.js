@@ -4,7 +4,7 @@ jQuery(function($){
 			let headingTypes = ['h2','h3','h4','h5','h6'];
 			
 			for (let i=0; i<headingTypes.length; i++){
-				let elements = $(headingTypes[i]);
+				let elements = $( headingTypes[i] );
 				
 				elements.attr('id',function(){
 					return $(this).text().replace(' ','_');
