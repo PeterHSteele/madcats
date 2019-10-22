@@ -29,4 +29,12 @@ jQuery(function($){
 		}
 	})
 
+	modal.click(function(){
+		toggleModal( $(this) );
+	})
+
+	$('form',modal).click(function(e){
+		e.stopPropagation()
+	})
+
 });
