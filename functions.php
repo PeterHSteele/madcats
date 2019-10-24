@@ -10,6 +10,8 @@ function madcats_scripts(){
 
 	//enqueue script to allow user to customize colors using theme customizer
 	wp_register_script('custom_styles',get_template_directory_uri().'/js/customColors.js');
+	//enqueue nav-toggle script
+	wp_register_script( 'madcats_navigation', get_template_directory_uri() . '/js/navigation.js' );
 
 	$style_array = array(
 		'headingColor' => get_theme_mod('heading_color'),
@@ -21,7 +23,8 @@ function madcats_scripts(){
 	//jquery was undefined unless enqueued explicitly for some reason
 	wp_enqueue_script('jquery');
 
-	wp_enqueue_script('custom_styles','',array('jquery'));
+	wp_enqueue_script( 'custom_styles', '', array('jquery') );
+	wp_enqueue_script( 'madcats_navigation' );
 
 	//enqueue script to allow toggling of modal
 	wp_enqueue_script('toggle_modal',get_template_directory_uri().'/js/toggleModal.js',array('jquery'));

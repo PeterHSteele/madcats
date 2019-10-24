@@ -10,40 +10,10 @@
 </head>
 <body <?php body_class() ?>>
 <?php wp_body_open() ?>
-<div class="small-screen-modal no-display">
-	<?php get_template_part('searchform'); ?>
-	<button class="modal-close">
-		Close
-	</button>
-</div>
 <div class='container'>
-<header class='small-screen-header'>
-	<ul>
-		<li class="small-screen-header-item">
-				
-				<i class="fa fa-bars fa-lg"></i>
-				<?php
-				if (has_nav_menu('primary')) : ?>
-					<nav class="main-navigation toggle-display">
-						<?php 
-						wp_nav_menu(
-							array(
-								'theme_location'=>'primary',
-								'menu_class'=>'primary-nav'
-							)
-						);
-						?>
-					</nav>
-				<?php endif; ?>
-		</li>
-	<?php if (is_active_sidebar('below-nav')) : ?>
-		<li  id="small-screen-header-search" class="small-screen-header-item">
-			<i class="fa fa-search fa-lg"></i>
-			
-		</li>
-	<?php endif ?>
-	</ul>
-</header>
+<?php 
+	get_header( 'small' );
+?>
 <header class='large-screen-header'>
 	<?php if ( function_exists( 'the_custom_logo' ) ) {
 		the_custom_logo();

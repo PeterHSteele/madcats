@@ -34,7 +34,7 @@ jQuery(function($){
 	})
 
 	$('form',modal).click(function(e){
-		e.stopPropagation()
+		e.stopPropagation();
 	})
 
 });
