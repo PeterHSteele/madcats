@@ -27,18 +27,9 @@ get_header();
 				<header class="entry-header single">
 				<?php the_title("<h1 class='page-title'>","</h1>");	?>
 				</header>
-					<div class="main-image">
-						<?php  if ( has_post_thumbnail( ) ){
-							the_post_thumbnail( 'large' );
-						}
-						?>
-					</div>
-					<div class="post-content">
-						<?php
-							the_content();
-						?>
-					</div>
 				<?php
+			
+				get_template_part( 'template-parts/content', 'single' );
 					
 				}
 
