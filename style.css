@@ -553,22 +553,29 @@ input[type=submit]:hover{
 .container{
 	display:flex;
 	flex-direction:row;
+	flex-wrap: wrap;
 	flex: 1 0 auto;
 }
 
 .large-screen-header{
 	max-width:25%;
 	background:black;
-	flex: 1 0 25%;
-	/*background:url('./images/placeholder1.svg');*/
+	position:fixed;
+	height: 100vh;
+	/*flex: 0 0 25%;
+	background:url('./images/placeholder1.svg');*/
 	box-sizing:border-box;
 	padding:0 5px;
 	font-family: sans-serif;
 	min-height:100%;
-	top:0;
+	top:32px;
 	left:0;
 	z-index:5;
 	border-right:2px solid var(--orangeLight);
+}
+
+.admin-bar .large-screen-header{
+	height: calc( 100vh - 32px );
 }
 
 .custom-logo{
@@ -609,13 +616,21 @@ input[type=submit]:hover{
 .primary-nav .sub-menu li a:hover{
 	/*color:var(--orange);*/
 	background:var(--orangeLight);
+	transform: translate( 3px, 3px);
 	/*color:white;*/
+}
+
+.primary-nav li a:focus,
+.primary-nav .sub-menu li a:focus{
+	/*box-shadow: inset 3px 3px var(--orangeSecondary);*/
+	box-shadow: none;
 }
 
 .content-area,
 .site-description{
 	box-sizing: border-box;
 	flex: 1 0 50%;
+	margin: 0 0 0 25%;
 }
 
 ul.sub-menu{
@@ -634,7 +649,7 @@ li.menu-item-has-children:hover{
 	width: 104%;
 }
 
-li.menu-item-has-children:hover .sub-menu{
+li.menu-item-has-children:hover > .sub-menu{
 	left:100%;
 	top:0;
 	display:block;
@@ -797,10 +812,25 @@ li.menu-item-has-children:hover .sub-menu{
 	background:var(--orangeLight);
 }
 
+/* Medium Screen Sidebar */ 
+
+aside.medium-screen{
+	background: var(--darkGray);
+	color: white;
+	display:none;
+	padding: 5px;
+}
 
 
 
-/*Page and Post titles*/
+
+/*Page and Post Headings and Headers*/
+
+.entry-header:not( .single ){
+	/*background: var(--orange);
+	box-shadow: 0px 3px 6px 0px var(--mediumLightGray);*/
+	padding: .83em 0;
+}
 
 .page-title{
 	margin:0;
@@ -808,14 +838,12 @@ li.menu-item-has-children:hover .sub-menu{
 	text-align: center;
 	color: var(--orange);
 	padding: 2em 0;
+	border-bottom: 1px dotted var(--mediumLightGray);
 }
 
 .entry-title{
+	margin: 0;
 	padding:0 10px;
-}
-
-.page-title{
-	border-bottom: 1px dotted var(--mediumLightGray);
 }
 
 .search-title{
@@ -824,10 +852,26 @@ li.menu-item-has-children:hover .sub-menu{
 	border-bottom:1px dotted var(--mediumLightGray);
 }
 
+.entry-title a{
+	color: var(--mediumDarkGray);
+	text-decoration: none;
+}
+
+.entry-title a:hover{
+	color: var(--darkGray);
+}
+
+.entry-meta{
+	font-size: .7em;
+	padding: 0 0.7em;
+}
+
 .search-term{color:var(--orange);}
 
+
+/* Post Content */
 .main-image{
-	padding:.5em 0;
+	padding:.5em;
 }
 
 .main-image img{
@@ -851,10 +895,11 @@ li.menu-item-has-children:hover .sub-menu{
 
 
 .site-main a{
-	text-decoration: underline
+	text-decoration: underline;
 }
 
 footer{
+	margin: 0 0 0 25%;
 	clear:both;
 	background:var(--veryLightGray);
 	background-repeat:no-repeat;
@@ -938,7 +983,7 @@ footer svg{
 	object-fit:contain;
 }
 
-/*longform pages*/
+/*longform pages
 
 .large-screen-header.longform-header{
 	position: fixed;
@@ -966,7 +1011,7 @@ ul.table-of-contents li i{
 	color:var(--orange);
 	float:right;
 }
-
+*/
 /*animation class*/
 .shake{
 	animation:1s shake;
@@ -1033,16 +1078,17 @@ section.longform+footer{
 
 /*End annotation container*/
 
-@media screen and ( max-width: 783px ){
 
-   .admin-bar .small-screen-header{
-   		position:sticky;
-   		top: 46px;
-   }
-}
 
 @media screen and (max-width:900px){
-	.large-screen-header{display:none}
+
+	footer{
+		margin: 0;
+	}
+
+	.large-screen-header{
+		display:none
+	}
 
 	.small-screen-header{
 		display:block;
@@ -1050,6 +1096,10 @@ section.longform+footer{
    	 	top: 0;
    	 	left: 0;
     }
+
+  	.medium-screen.sidebar{
+  		display:block;
+  	}
 
 	.admin-bar .small-screen-header{
 		position:sticky;
@@ -1064,7 +1114,24 @@ section.longform+footer{
 	}
 	.container{
 		flex-direction: column;
+		flex-wrap: nowrap;
 	}
+}
+
+@media screen and ( max-width: 783px ){
+
+   .admin-bar .small-screen-header{
+   		position:sticky;
+   		top: 46px;
+   }
+}
+
+@media screen and ( max-width: 600px ){
+
+   .admin-bar .small-screen-header{
+   		position:sticky;
+   		top: 0px;
+   }
 }
 
 

@@ -1,6 +1,8 @@
 <?php
 /**
  *
+ * Template for displaying single posts
+ *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WordPress
@@ -22,24 +24,9 @@ get_header();
 			while ( have_posts() ) {
 				the_post();
 				?>
-				<header class="entry-header">
-				<?php
-				if (is_singular()){
-					the_title("<h1 class='page-title'>","</h1>");
-				} else {
-					the_title( sprintf('<h2 class="entry-title"><a href="%s">', get_the_permalink() ),'</a></h2>');
-				}	
-				?>
+				<header class="entry-header single">
+				<?php the_title("<h1 class='page-title'>","</h1>");	?>
 				</header>
-				<?php if ( ! get_theme_mod( 'hide_post_meta' ) ): ?>		
-				<div class="entry-meta">
-					<?php 
-						madcats_posted_by();
-						madcats_posted_on();
-						madcats_get_categories();
-					?>
-				</div>
-				<?php endif; ?>
 					<div class="main-image">
 						<?php  if ( has_post_thumbnail( ) ){
 							the_post_thumbnail( 'large' );

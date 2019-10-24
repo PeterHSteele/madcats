@@ -1,5 +1,5 @@
 </div><!--container-->
-<footer>
+<footer class="page-footer">
 	<div class="mask">
 	<?php if (has_nav_menu('footer') ): ?>
 	<nav>

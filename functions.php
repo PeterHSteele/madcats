@@ -119,6 +119,19 @@ function madcats_customize_register( $wp_customize ){
 		)
 	);
 
+	//customize whether post meta should appear
+	$wp_customize->add_setting( 'hide_post_meta', array(
+		'default' => false
+	));
+
+	$wp_customize->add_control( 'post-meta-display', array(
+		'label' => 'Hide post meta',
+		'description' => 'Hides meta information (author, date posted, and more ) typically shown on posts by default',
+		'section' => 'madcats_customizations',
+		'type' => 'checkbox',
+		'settings' => 'hide_post_meta',
+	));
+
 }
 
 add_action('customize_register','madcats_customize_register');
@@ -159,4 +172,53 @@ add_action('get_header', 'remove_admin_login_header');
 
 */
 
+/* Template Tags */
+
+//Theme mod for whether to show post meta
+
+if ( ! function_exists( 'madcats_posted_by' ) ) :
+	/**
+	* Print the post author's name
+	*
+	* @since 1.0.0
+	*/
+	function madcats_posted_by(){
+		echo sprintf( 
+			'<span>%s<a href=%s>%s</a> </span>',
+			__( 'Posted by: ', 'madcats'),
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+			esc_html( get_the_author() )
+		);
+	}
+endif;
+
+if ( ! function_exists( 'madcats_posted_on' ) ) :
+	function madcats_posted_on(){
+		echo sprintf( 
+			'<span class="post-date" >%1$s <time datetime="%2$s">%3$s</time>. </span>',
+			__( 'on', 'madcats' ),
+			get_the_date( DATE_WC3 ),
+			get_the_date()
+		);
+	}
+endif;
+
+if ( ! function_exists( 'madcats_get_categories' ) ) :
+	function madcats_get_categories(){
+		$categories = get_the_category();
+		$output = '';
+		foreach ( $categories as $category ){
+			$output .= sprintf( 
+				'<a class="madcats-category" href="%s">%s</a><span class="sep"> </span>',
+				esc_url( get_category_link( $category->term_id ) ),
+				$category->name
+			);
+		}
+
+		echo sprintf( 
+			'<span><i class="fas fa-folder"></i> %s</span>',
+			$output
+		);
+	}
+endif;
 ?>
