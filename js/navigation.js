@@ -5,12 +5,12 @@ jQuery(document).ready(function($){
 
 	function closeNav( btn, nav ){
 		btn.attr( 'aria-pressed', true );
-		nav.removeClass( 'open' ).attr( 'aria-expanded', false ).slideUp( 300 );
+		nav.removeClass( 'open' ).attr( 'aria-expanded', false ).slideUp( 200 );
 	}
 
 	function openNav( btn, nav){
 		btn.attr( 'aria-pressed', false );
-		nav.addClass( 'open' ).attr( 'aria-expanded', true ).slideDown( 300 ); 
+		nav.addClass( 'open' ).attr( 'aria-expanded', true ).slideDown( 200 ); 
 	}
 
 	btn.click(function(e){
