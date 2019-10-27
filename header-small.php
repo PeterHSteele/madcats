@@ -28,18 +28,18 @@
 			</button>
 		</li>
 	<?php endif; ?>
-				<?php
-				if ( has_nav_menu('primary') ) : ?>
-					<nav class="main-navigation toggle-display">
-						<?php 
-						wp_nav_menu(
-							array(
-								'theme_location'=>'primary',
-								'menu_class'=>'primary-nav'
-							)
-						);
-						?>
-					</nav>
-				<?php endif; ?>
 </ul>
+<?php
+	if ( has_nav_menu('primary') ) : ?>
+	<nav class="main-navigation toggle-display" aria-label="<?php esc_attr_e( 'Primary Menu', 'madcats' )?>">
+	<?php 
+		wp_nav_menu(
+			array(
+				'theme_location'=>'primary',
+				'menu_class'=>'primary-nav'
+			)
+		);
+	?>
+	</nav>
+	<?php endif; ?>
 </header>
