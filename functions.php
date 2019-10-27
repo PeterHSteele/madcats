@@ -38,7 +38,7 @@ add_action('wp_enqueue_scripts','madcats_scripts');
 
 function init_widgets(){
 
-	register_sidebar(array(
+	register_sidebar( array(
 		"name"=>"Below Nav Widgets",
 		"id"=>"below-nav",
 		"before_widget"=>"<div class='nav-widgets'>",
@@ -47,13 +47,20 @@ function init_widgets(){
 		"after_title"=>"</h2>"
 	));
 
-	register_sidebar(array(
-		"name"=>"footer_widgets",
-		"id"=>"footer_widgets",
+	register_sidebar( array(
+		"name"=>"footer-widgets",
+		"id"=>"footer-widgets",
 		"before_widget"=>"<div class='footer-widgets'>",
 		"after_widget"=>"</div>"
 		)
 	);
+
+	register_sidebar( array(
+		"name" 			=> "404-widgets",
+		"id"   			=> "404-widgets",
+		"before_widget" => "<div class='fourohfour-widgets'>",
+		"after_widget" 	=> "</div>"
+	));
 
 }
 
@@ -86,6 +93,22 @@ function madcats_customize_register( $wp_customize ){
 			)
 		)
 	);
+
+	//allow 404 page customization
+	$wp_customize->add_setting( '404_image', array(
+		'default' => null
+	) );
+
+
+	$wp_customize->add_control( new WP_Customize_Image_Control(
+		$wp_customize,
+		'404_image',
+		array(
+			'label'   => __( '404 page image' , 'madcats' ),
+			'section' => 'madcats_customizations',
+			'setting' => '404_image'
+		)
+	) );
 
 	//allow user to customize background image for header
 	$wp_customize->add_setting('header_background_image',array(

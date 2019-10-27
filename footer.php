@@ -12,8 +12,8 @@
 		?>
 	</nav>
 	<?php endif; 
-	if (is_active_sidebar('footer_widgets')){
-		dynamic_sidebar('footer_widgets');
+	if ( is_active_sidebar( 'footer-widgets' ) ){
+		dynamic_sidebar( 'footer-widgets' );
 	}
 	?>
 	</div>
