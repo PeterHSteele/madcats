@@ -17,8 +17,7 @@
 <header class='large-screen-header'>
 	<?php if ( function_exists( 'the_custom_logo' ) ) {
 		the_custom_logo();
-	} ?>
-	<?php
+	}
 	if (has_nav_menu('primary')) : ?>
 		<nav class="main-navigation">
 			<?php 
@@ -30,8 +29,9 @@
 			);
 			?>
 		</nav>
-	<?php endif; ?>
-	<?php if (is_active_sidebar('below-nav')) {
+	<?php 
+	endif;
+	if (is_active_sidebar('below-nav')) {
 		dynamic_sidebar('below-nav');
 	} 
 	?>
