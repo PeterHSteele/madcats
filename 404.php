@@ -3,7 +3,7 @@
 
 	get_header();
 ?>
-<section <?php post_class( 'content-area page-four-oh-four'); ?>>
+<section <?php post_class( 'content-area page-four-oh-four' ); ?>>
 	<main class="site-main">
 		<header>
 			<h1>whoops, there's nothing here!</h1>
