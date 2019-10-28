@@ -30,15 +30,13 @@ get_header();
 				<?php
 			
 				get_template_part( 'template-parts/content', 'single' );
-					
+
+				if ( comments_open() || get_comments_number() ){
+					comments_template();
 				}
-
-		} else {
-		?>
-			<h2>There's nothing on this website</h2>
-		<?php	
-
-		}
+					
+			}
+		} 
 		?>
 
 		</main><!-- .site-main -->

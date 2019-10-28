@@ -1045,11 +1045,15 @@ aside.medium-screen{
 	border-bottom:none;
 }
 
-
-
 .site-main a{
 	text-decoration: underline;
 }
+
+/*
++++++++++++++++++++++
+Footer
++++++++++++++++++++++
+*/
 
 footer{
 	margin: 0 0 0 25%;
@@ -1114,6 +1118,36 @@ footer svg{
 	height:30px;
 }
 
+/*
++++++++++++++++++++++
+Comments
++++++++++++++++++++++
+*/
+
+.comments{
+	padding: .5em;
+}
+
+.comments form label{
+	display:block;
+}
+
+.comments-list{
+	border-bottom: 1px dotted var( --mediumLightGray);
+}
+
+.comments li{
+	padding: .5em;
+}
+
+.comments li ul li{
+	margin-left: 1em;
+	border: 1px dotted #ccc;
+}
+
+.comments li:nth-child(odd){
+	background:#eee;
+}
 /* card layout */
 
 .card-container{
