@@ -8,7 +8,7 @@
 */
 ?>
 <div class="small-screen-modal no-display">
-	<?php get_template_part('searchform'); ?>
+	<?php get_template_part( 'searchform' ); ?>
 	<button class="modal-close">
 		Close
 	</button>

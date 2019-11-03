@@ -423,6 +423,7 @@ big {
 /*colors*/
 :root{
 	--orange:rgb(226,124,34);
+	--orangeRGBA:rgba(226,124,34,.8);
 	--orangeSecondary:rgb(195,98,0);
 	--orangeLight:rgb(255,177,88);
 	--darkGray:rgb(50,50,50);
@@ -443,7 +444,10 @@ html{
 	margin:0;
 }
 
-h1{text-align: center}
+h1{
+	text-align: center
+	color:var(--orange);
+}
 
 body{
 	margin: 0;
@@ -563,7 +567,7 @@ input[type=submit]:hover{
 
 .large-screen-header{
 	max-width:25%;
-	background:rgb(20,20,20);
+	background: black;
 	position:fixed;
 	height: 100vh;
 	/*flex: 0 0 25%;
@@ -743,9 +747,11 @@ li:hover > .sub-menu{
 
 /*
 +++++++++++++++++++++++++
-Header Widget Area
+Widget Areas
 +++++++++++++++++++++++++
 */
+
+/*Header*/
 
 .nav-widgets{
 	color:white;
@@ -789,6 +795,140 @@ Header Widget Area
 	text-align: left;
 }
 
+/* Additional sidebar */
+
+.sidebar-widgets{
+	color: white;
+	background: var(--darkGray);
+	margin: 2em;
+	padding: 1em;
+}
+
+.sidebar-widgets a{
+	color: var(--orangeLight);
+}
+
+/*
+=====================
+Feature Page 
+=====================
+*/
+
+/* Banner Call to Action */
+
+.banner{
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 300px;
+	background-position: center;
+}
+
+
+
+.banner > div{
+	width: 40%;
+	margin: 0 auto;
+	color: white;
+	padding: 1em;
+	margin-top: 50px; 
+	text-align: center
+}
+
+.banner h1,
+.banner p{
+	font-weight: 100;
+	color: white;
+}
+
+.banner button{
+	padding: 0;
+	background: rgba( 255, 255, 255, .5);
+	border: 2px solid white;
+}
+
+.banner button a{
+	
+	display: block;
+	padding: .5em 1em;
+	height:100%;
+	color: white;
+	font-size: 2em;
+	
+	transition: all .2s;
+}
+
+.banner button a:hover{
+	background: var(--darkGray);
+}
+
+/* Slider */
+
+section.slider-container{
+	padding: 40px;
+	box-shadow: inset 3px 3px 8px 0px rgb( 220, 220, 220);
+}
+
+section .slider{
+	box-sizing: border-box;
+	padding: .5em;
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	box-shadow: 0 0 8px 0px rgb( 210, 210, 210);
+}
+
+.slider .slide{
+	height: 100%;
+	position: relative;
+}
+
+.slider button{
+	display:block;
+	background: var(--orange);
+	color: white;
+	align-self: center;
+	margin-left: .5em;
+	padding: .5em;
+	box-shadow: 3px 3px var(--orangeSecondary);
+	outline:none;
+}
+
+.slider button:first-child{
+	margin-right: .5em;
+}
+
+.slider button:hover{
+	background: var(--orangeLight);
+}
+
+.slider button:active{
+	box-shadow:none;
+	transform: translate( 3px, 3px);
+}
+
+.slider .slide img{
+	width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+}
+
+.slide-text{
+	border-top: 2px solid white;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: rgba( 255, 255, 255, .8 );
+	color: var( --darkGray );
+}
+
+.slide-text > * {
+	padding: 0 8px;
+}
+
+/* Breadcrumbs */
 
 /*small screen nav and widget area*/
 
@@ -934,6 +1074,7 @@ Header Widget Area
 }
 
 
+/* 404 page */
 
 .fourohfour-widgets ul{
 	margin: 0 auto;
@@ -1024,11 +1165,11 @@ aside.medium-screen{
 
 .main-image img{
 	max-width: calc( 100% - 20px );
-	/*box-shadow: 5px 5px #FFF,
+	box-shadow: 5px 5px #FFF,
 	10px 10px var(--orangeSecondary),
 	15px 15px var(--orange),
-	20px 20px var(--orangeLight);*/
-	box-shadow: 3px 3px 5px var(--mediumGray);
+	20px 20px var(--orangeLight);
+	/*box-shadow: 3px 3px 5px var(--mediumGray)*/
 }
 
 .page-content,
@@ -1132,6 +1273,10 @@ Comments
 	display:block;
 }
 
+.comment-meta{
+	font-size: .7em;
+}
+
 .comments-list{
 	border-bottom: 1px dotted var( --mediumLightGray);
 }
@@ -1140,9 +1285,10 @@ Comments
 	padding: .5em;
 }
 
-.comments li ul li{
+.comments li ul.children li{
 	margin-left: 1em;
 	border: 1px dotted #ccc;
+	background: inherit;
 }
 
 .comments li:nth-child(odd){

@@ -8,6 +8,18 @@ function madcats_scripts(){
 	//enqueue main stylesheet
 	wp_enqueue_style('madcats-style',get_stylesheet_uri());
 
+	//enqueue stylesheet for sidebar-right layout
+	if ( is_page_template( 'page-templates/sidebar-right.php' ) ){
+		wp_enqueue_style( 'sidebar-right-style', get_stylesheet_directory_uri() . '/layouts/sidebar-right.css' );
+	} 
+
+	//enqueue script for feature layout
+	if ( is_page_template( 'page-templates/feature.php' ) ){
+		wp_enqueue_style( 'slick-style' , get_stylesheet_directory_uri() . '/js/slick/slick.css');
+		wp_enqueue_script( 'slick-script', get_stylesheet_directory_uri() . '/js/slick/slick.min.js', array( 'jquery' ) );
+		wp_enqueue_script( 'slider-script', get_stylesheet_directory_uri() . '/js/slider.js', array( 'jquery', 'slick-script' ) );
+	} 
+
 	//enqueue script to allow user to customize colors using theme customizer
 	wp_register_script('custom_styles',get_template_directory_uri().'/js/customColors.js');
 	//enqueue nav-toggle script
@@ -23,7 +35,7 @@ function madcats_scripts(){
 	//jquery was undefined unless enqueued explicitly for some reason
 	wp_enqueue_script('jquery');
 
-	wp_enqueue_script( 'custom_styles', '', array('jquery') );
+	//wp_enqueue_script( 'custom_styles', '', array('jquery') );
 	wp_enqueue_script( 'madcats_navigation' );
 
 	//enqueue script to allow toggling of modal
@@ -62,6 +74,12 @@ function init_widgets(){
 		"after_widget" 	=> "</div>"
 	));
 
+	register_sidebar( array(
+		"name" 			=> "madcats-sidebar-widgets",
+		"id" 			=> "madcats-sidebar-widgets",
+		"before_widget" => '<div class="sidebar-widgets">',
+		"after_widget" 	=> '</div>'
+	));
 }
 
 add_action('widgets_init','init_widgets');
@@ -76,6 +94,7 @@ function madcats_customize_register( $wp_customize ){
 	);
 
 	//allow user to customize h1 color
+	/*
 	$wp_customize->add_setting('heading_color',array(
 		'default'=>'#e27c22',
 		'sanitize_callback'=>'sanitize_hex_color'
@@ -93,7 +112,7 @@ function madcats_customize_register( $wp_customize ){
 			)
 		)
 	);
-
+	*/
 	//allow 404 page customization
 	$wp_customize->add_setting( '404_image', array(
 		'default' => null
@@ -158,10 +177,96 @@ function madcats_customize_register( $wp_customize ){
 		'settings' => 'hide_post_meta',
 	));
 
+	//Customize Feature Page
+	$wp_customize->add_setting( 'madcats-featured-banner', array(
+		'default' => ''
+	) );
+
+	$wp_customize->add_section( 'madcats-featured', array(
+		'title' => __( 'Madcats Feature Page' , 'madcats' ),
+		'description' => __( 'Feature page Settings' , 'madcats' ),
+		'priority' => 10,
+		'active_callback' => 'madcats_is_featured'
+	) );
+	
+	$wp_customize->add_control( new WP_Customize_Image_Control(
+		$wp_customize,
+		'madcats-featured-banner', 
+		array(
+			'label' => __( 'Banner Image', 'madcats' ),
+			'description' => __( 'The featured image' , 'madcats' ),
+			'section' => 'madcats-featured',
+			'setting' => 'madcats-featured-banner'
+		)
+	));
+
+	$wp_customize->add_setting( 'banner-text', array(
+		'default' => ''
+	) );
+
+	$wp_customize->add_control( 'banner-overlay', array(
+		'label' => __( 'Banner Text', 'madcats' ),
+		'description' => __( 'text to overlay on top of banner image at top of page' , 'madcats' ),
+		'section' => 'madcats-featured',
+		'type' => 'textarea',
+		'settings' => 'banner-text',
+	) );
+
+	$wp_customize->add_setting( 'banner-heading', array(
+		'default' => ''
+	) );
+
+	$wp_customize->add_control( 'banner-heading', array(
+		'label' => __( 'Banner Heading', 'madcats' ),
+		'description' => __( 'heading to overlay on top of banner image at top of page' , 'madcats' ),
+		'section' => 'madcats-featured',
+		'type' => 'text',
+		'settings' => 'banner-heading',
+	));
+	//call to action button link
+	$wp_customize->add_setting( 'banner-cta-button-link', array(
+		'default' => ''
+	) );
+
+	$wp_customize->add_control( 'banner-cta-button-link', array(
+		'label' => __( 'Banner Call to Action Link', 'madcats' ),
+		'description' => __( 'Link for call to action button' , 'madcats' ),
+		'section' => 'madcats-featured',
+		'type' => 'text',
+		'settings' => 'banner-cta-button-link',
+	) );
+	//call to action button text
+	$wp_customize->add_setting( 'banner-cta-button-text', array(
+		'default' => ''
+	) );
+
+	$wp_customize->add_control( 'banner-cta-button-text', array(
+		'label' => __( 'Banner Call to Action Text', 'madcats' ),
+		'description' => __( 'Text for call to action button. Will only show up if call to action link is specified.' , 'madcats' ),
+		'section' => 'madcats-featured',
+		'type' => 'text',
+		'settings' => 'banner-cta-button-text',
+	) );
+
+	$wp_customize->add_setting( 'slider-posts', array(
+		'default' => '',
+		'sanitize_callback' => 'sanitize_text_field'
+	) );
+
+	$wp_customize->add_control( 'slider-posts', array(
+		'label' => __( 'Posts to include in slider', 'madcats' ),
+		'description' => __( 'Comma-separated list of Post Id\'s.', 'madcats' ),
+		'section' => 'madcats-featured',
+		'type' => 'text',
+		'settings' => 'slider-posts',
+	) );
 }
 
-add_action('customize_register','madcats_customize_register');
+add_action( 'customize_register', 'madcats_customize_register');
 
+function madcats_is_featured(){
+	return is_page_template( 'page-templates/feature.php' );
+}
 
 add_theme_support('post-thumbnails');
 

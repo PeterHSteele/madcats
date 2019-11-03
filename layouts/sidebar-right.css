@@ -1,0 +1,10 @@
+.content-area.sidebar-right{
+	width:50%;
+	float:left;
+}
+
+#sidebar{
+	float:right;
+	clear:none;
+	width:25%;
+}
