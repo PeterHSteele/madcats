@@ -1284,11 +1284,11 @@ aside.medium-screen{
 
 .main-image img{
 	max-width: calc( 100% - 20px );
-	box-shadow: 5px 5px #FFF,
+	/*box-shadow: 5px 5px #FFF,
 	10px 10px var(--orangeSecondary),
 	15px 15px var(--orange),
-	20px 20px var(--orangeLight);
-	/*box-shadow: 3px 3px 5px var(--mediumGray)*/
+	20px 20px var(--orangeLight);*/
+	box-shadow: 3px 3px 5px var(--mediumGray)
 }
 
 .page-content,
