@@ -928,7 +928,126 @@ section .slider{
 	padding: 0 8px;
 }
 
+/* Midpage Feature Image */
+/*
+.feature-banner-2{
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+*/
+.feature-banner-2-content{
+	/*background: rgba( 0,0,0,.75 );*/
+	padding: 0 20%;
+	margin: 0 auto;
+}
+/*
+.feature-banner-2-content h2,
+.feature-banner-2-content p{
+	color: var(--veryLightGray);
+	line-height: 1.5;
+}
+
+.feature-banner-2-content h2,
+.feature-banner-2-content p {
+	margin: 0;
+	padding: .5em 0;
+}
+*/
 /* Breadcrumbs */
+
+.breadcrumbs{
+	display: flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+	background: var(--veryLightGray);
+}
+
+.crumb{
+	box-sizing: border-box;
+	flex: 1 0 31.3%;
+	margin: 1%;
+	padding: .5em;
+	background: white;
+	box-shadow: 0 0 6px 0 rgb(220,220,220);
+	border-radius: 10px;
+	background: var( --darkGray );
+}
+
+.crumb h2,
+.crumb h3,
+.crumb h4,
+.crumb h5,
+.crumb h6,
+.crumb a{
+	color: var(--orangeLight);
+}
+
+.crumb a:hover{
+	text-decoration: underline;
+}
+
+.crumb p,
+.crumb li{
+	color: white;
+}
+
+/* Feature Widgets Section */
+section.feature-widgets-section{
+	position: relative;
+	min-height: 500px;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+section .feature-mask{
+	display: flex;
+	color: var(--lightGray);
+	justify-content: center;
+	align-items: stretch;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba( 50, 50, 50, .75);
+	z-index: 0;
+}
+
+section .feature-mask a{
+	color: var(--lightGray);
+}
+
+.feature-widget-col{
+	position:relative;
+	max-width: 50%;
+	flex: 1 0;
+	display: flex;
+	flex-direction: column;
+}	
+
+.feature-widget-one,
+.feature-widget-two{
+	clear: none;
+	/*flex: 0 0 25%;*/
+	padding: 1em 2em;
+	box-sizing: border-box;
+}
+
+.feature-widgets-1:after{
+	position:absolute;
+	top: 25%;
+	right: 0;
+	width: 1px;
+	height: 50%;
+	content:"";
+	border-right: 1px solid var( --veryLightGray );
+}
+
+footer.feature{
+	width: 100%;
+	margin: 0;
+}
 
 /*small screen nav and widget area*/
 

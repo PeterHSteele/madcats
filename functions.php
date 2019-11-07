@@ -80,9 +80,25 @@ function init_widgets(){
 		"before_widget" => '<div class="sidebar-widgets">',
 		"after_widget" 	=> '</div>'
 	));
+
+	register_sidebar( array(
+		"name" 			=> 'feature-widgets-1',
+		"id"			=> 'feature-widgets-1',
+		"description" 	=> __( 'Left widget column in feature widgets area', 'madcats' ),
+		'before_widget' => '<div class="feature-widget-one">',
+		'after_widget'  => '</div>'
+	));
+
+	register_sidebar( array(
+		"name"			=> 'feature-widgets-2',
+		"id"			=> 'feature-widgets-2',
+		"description" 	=> __( 'Right widget column in feature widgets area', 'madcats' ),
+		'before_widget' => '<div class="feature-widget-two">',
+		'after_widget'  => '</div>'
+	));
 }
 
-add_action('widgets_init','init_widgets');
+add_action( 'widgets_init' , 'init_widgets' );
 
 function madcats_customize_register( $wp_customize ){
 
@@ -163,6 +179,19 @@ function madcats_customize_register( $wp_customize ){
 			)
 		)
 	);
+
+	$wp_customize->add_setting( 'madcats-contact-form', array(
+		'default' => '',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+
+	$wp_customize->add_control( 'madcats-contact-form', array(
+		'label' => 'Contact Form Shorcode',
+		'description' => 'shortcode for a contact form.',
+		'section' => 'madcats_customizations',
+		'type' => 'text',
+		'settings' => 'madcats-contact-form',
+	));
 
 	//customize whether post meta should appear
 	$wp_customize->add_setting( 'hide_post_meta', array(
@@ -247,7 +276,7 @@ function madcats_customize_register( $wp_customize ){
 		'type' => 'text',
 		'settings' => 'banner-cta-button-text',
 	) );
-
+	//setting and control for posts to add to slider
 	$wp_customize->add_setting( 'slider-posts', array(
 		'default' => '',
 		'sanitize_callback' => 'sanitize_text_field'
@@ -260,6 +289,62 @@ function madcats_customize_register( $wp_customize ){
 		'type' => 'text',
 		'settings' => 'slider-posts',
 	) );
+	//second banner image
+	$wp_customize->add_setting( 'madcats-featured-banner-2', array(
+		'default' => ''
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Image_Control(
+		$wp_customize,
+		'madcats-featured-banner-2',
+		array(
+			'label' => __( 'Banner Image 2.', 'madcats' ),
+			'description' => __( 'image to act as spacer between sections', 'madcats' ),
+			'section' => 'madcats-featured',
+			'setting' => 'madcats-featured-banner-2'
+		)
+	));
+	//post to display over second banner image
+	$wp_customize->add_setting( 'madcats-banner-overlay-2', array(
+		'default' => '',
+	) );
+
+	$wp_customize->add_control( 'madcats-banner-overlay-2', array(
+		'type' => 'number',
+		'description' => __( 'post content to overlay second banner section', 'madcats' ),
+		'label' => __( 'Second Banner Overlay', 'madcats' ),
+		'settings' => 'madcats-banner-overlay-2',
+		'section' => 'madcats-featured'
+	) );
+	//setting and control for posts to add to breadcrumbs
+	$wp_customize->add_setting( 'breadcrumb-posts', array(
+		'default' => '',
+		'sanitize_callback' => 'sanitize_text_field'
+	) );
+
+	$wp_customize->add_control( 'breadcrumb-posts', array(
+		'label' => __( 'Posts to include in breadcrumbs', 'madcats' ),
+		'description' => __( 'Comma-separated list of Post Id\'s.', 'madcats' ),
+		'section' => 'madcats-featured',
+		'type' => 'text',
+		'settings' => 'breadcrumb-posts',
+	) );
+
+	//background image for 'featured-widgets-1' sidebar (which is really a section)
+	$wp_customize->add_setting( 'feature-widget-background', array(
+		'default' => '',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Image_Control(
+		$wp_customize,
+		'feature-widget-background', 
+		array(
+			'label' => __( 'Widget Area Background Image', 'madcats' ),
+			'description' => __( 'Image for parallax display behind the widget section', 'madcats' ),
+			'section' => 'madcats-featured',
+			'setting' => 'feature-widget-background'
+		)
+	));
 }
 
 add_action( 'customize_register', 'madcats_customize_register');
@@ -267,6 +352,72 @@ add_action( 'customize_register', 'madcats_customize_register');
 function madcats_is_featured(){
 	return is_page_template( 'page-templates/feature.php' );
 }
+
+function madcats_get_posts_for_feature( $setting ){
+	$posts = get_theme_mod( $setting );
+	if ( $posts ){
+		return array_map( 'intval' , explode( ',' , $posts ) );
+	} else {
+		return false;
+	}
+}
+
+//Contact Form Widget
+
+class Madcats_Contact_Form_Widget extends WP_Widget{
+
+	public function __construct(){
+		parent::__construct(
+			'madcats-contact-form-widget',
+			__( 'Contact Form Widget', 'madcats' ),
+			array(
+			 'description' => __( 'add contact form to widget area.', 'madcats' )
+			)
+		);
+	}
+
+	public function widget( $args, $instance ){
+
+		$title = apply_filters( 'widget_title', $instance['title'] );
+
+		echo $args['before_widget'];
+		if (! empty( $title) ){
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
+
+		$form = get_theme_mod( 'madcats-contact-form' );
+		if ( $form ){
+		?>
+			[wpforms id="414"]
+		<?php
+		}
+
+		echo $args['after_widget'];
+	}  
+
+	public function form ( $instance ){
+		
+		if ( isset( $instance['title'] ) ){
+			$title = $instance['title'];
+		}
+		else{
+			$title = __( 'Contact', 'madcats' );
+		}
+		?>
+
+		<p>
+			<label for="madcats-contact-widget-admin"><?php _e( 'Title:', 'madcats' ); ?></label> 
+			<input 
+			type="text" 
+			name="title" 
+			value="<?php echo esc_attr( $title ) ?>"
+			id="title" />
+		</p>
+		<?php
+	}
+}
+
+register_widget( 'Madcats_Contact_Form_Widget' );
 
 add_theme_support('post-thumbnails');
 
@@ -300,8 +451,12 @@ function remove_admin_login_header() {
 }
 add_action('get_header', 'remove_admin_login_header');
 
-
 */
+
+function madcats_breadcrumb_excerpt( $content ){
+	$indexp = strpos( $content, '</p>', 300 );
+	echo substr( $content, 0, $indexp );
+}
 
 /* Template Tags */
 

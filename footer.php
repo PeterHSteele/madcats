@@ -1,5 +1,5 @@
 </div><!--container-->
-<footer class="page-footer">
+<footer class="page-footer <?php echo is_page_template( 'page-templates/feature.php' ) ? 'feature' : '' ?>">
 	<div class="mask">
 	<?php if (has_nav_menu('footer') ): ?>
 	<nav>

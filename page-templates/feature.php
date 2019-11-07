@@ -45,10 +45,8 @@ $url = get_theme_mod( 'madcats-featured-banner' );
 	</div>
 </div><!--.banner-->
 <?php 
-$slides = get_theme_mod( 'slider-posts' );
+$slides = madcats_get_posts_for_feature( 'slider-posts' );
 if ( $slides ) : 
-	$slides = explode( ',', $slides ); 
-	$slides = array_map( 'intval', $slides );
 	?>
 	<section class="slider-container">
 		<div class="slider">
@@ -62,11 +60,56 @@ if ( $slides ) :
 		?>
 		</div><!--.slider-->
 	</section><!--.slider-container-->
-<?php endif; ?>
-<div class="breadcrumbs">
-	<div class="crumb crumb-1"></div>
-</div>
-
+<?php 
+endif;
+$crumbs = madcats_get_posts_for_feature( 'breadcrumb-posts' );
+$banner_2 = get_theme_mod( 'madcats-featured-banner-2' );
+$overlay_2 = get_theme_mod( 'madcats-banner-overlay-2');
+//if ( $slides && $crumbs && $overlay_2 ) :
+/*style="background-image: url( <?php echo 'banner_2' ? esc_url( $banner_2 ) : '' ?> ) "*/
+?>
+	<div class="feature-banner-2" >
+		<div class='feature-banner-2-content'>
+		<?php 
+		//$post = get_post( $overlay_2 );
+		the_title('<h2>', '</h2>');
+		echo '<p>' . wp_kses( get_the_content( null, false, $post ), array( 'p' , 'a' ) ) . '</p>';
+		?>
+		</div>
+	</div>
 <?php
-
+//endif;
+if ( $crumbs ) :
+?>
+	<section class="breadcrumbs">
+		<?php 
+		global $post;
+		foreach( $crumbs as $crumb ){
+			$post = get_post( $crumb );
+			get_template_part( 'template-parts/content', 'breadcrumb' );
+		}
+		?>
+	</section>
+<?php
+endif;
+$widget_background_image = get_theme_mod( 'feature-widget-background' );
+?>
+<section class="feature-widgets-section" style="background-image: url( <?php echo $widget_background_image ? esc_url( $widget_background_image ) : '' ?> )">
+	<div class="mask feature-mask">
+	<?php if ( is_active_sidebar( 'feature-widgets-1' ) ) : ?>
+		<div class="feature-widget-col feature-widgets-1">
+			<?php dynamic_sidebar( 'feature-widgets-1' ); ?>
+		</div>
+	<?php
+	endif;
+	if ( is_active_sidebar( 'feature-widgets-2' ) ) :
+	?>
+		<div class="feature-widget-col feature-widgets-2">
+			<?php dynamic_sidebar( 'feature-widgets-2' ); ?>
+		</div>
+	<?php endif; ?>
+	</div> 
+</section>
+<?php
+$feature_footer = ' feature';
 get_footer();
