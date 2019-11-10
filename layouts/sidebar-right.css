@@ -1,0 +1,20 @@
+body .container{
+	display:block;
+}
+
+.content-area.sidebar-right{
+	width:100%;
+	margin: 0 -25% 0 0;
+	float:left;
+}
+
+.sidebar-right .site-main{
+	margin: 0 25% 0 25%;
+}
+
+#sidebar{
+	float:right;
+	clear:none;
+	overflow: hidden;
+	width: 25%;
+}
