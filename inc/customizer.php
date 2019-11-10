@@ -259,3 +259,7 @@ add_action( 'customize_register', 'madcats_customize_register');
 function madcats_is_featured(){
 	return is_page_template( 'page-templates/feature.php' );
 }
+
+function madcats_intval( $num ){
+	return intval( $num, 10 );
+}

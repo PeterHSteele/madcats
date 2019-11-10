@@ -819,7 +819,7 @@ Feature Page
 .banner{
 	background-repeat: no-repeat;
 	background-size: cover;
-	min-height: 300px;
+	/*min-height: 300px;*/
 	background-position: center;
 }
 
@@ -830,8 +830,11 @@ Feature Page
 	margin: 0 auto;
 	color: white;
 	padding: 1em;
-	margin-top: 50px; 
-	text-align: center
+	text-align: center;
+}
+
+.banner h1{
+	text-align: center;
 }
 
 .banner h1,
@@ -995,7 +998,6 @@ section .slider{
 /* Feature Widgets Section */
 section.feature-widgets-section{
 	position: relative;
-	min-height: 500px;
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -1005,7 +1007,7 @@ section .feature-mask{
 	color: var(--lightGray);
 	justify-content: center;
 	align-items: stretch;
-	position: absolute;
+	position: relative;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -1258,6 +1260,7 @@ aside.medium-screen{
 	text-align: center;
 	padding:2em;
 	border-bottom:1px dotted var(--mediumLightGray);
+	line-height: 1em;
 }
 
 .entry-title a{
@@ -1547,6 +1550,7 @@ section.longform+footer{
    	 	position: fixed;
    	 	top: 0;
    	 	left: 0;
+   	 	z-index: 1000;
     }
 
   	.medium-screen.sidebar{
@@ -1568,6 +1572,15 @@ section.longform+footer{
 		flex-direction: column;
 		flex-wrap: nowrap;
 	}
+
+	/*feature page*/
+	section .slider{
+		width: 100%;
+	}
+
+	.crumb{
+		flex: 0 0 48%;
+	}
 }
 
 @media screen and ( max-width: 783px ){
@@ -1584,6 +1597,29 @@ section.longform+footer{
    		position:sticky;
    		top: 0px;
    }
+
+   /*Feature page*/
+  	section.slider-container{
+		padding: 0;
+	}
+
+	.breadcrumbs{
+		flex-flow: column nowrap;
+	}
+
+	.crumb{
+		flex: 0 0 auto;
+	}
+
+	.feature-mask{
+		flex-direction: column;
+	}
+
+	.feature-widget-col{
+		flex: 0 0 auto;
+		max-width: 100%;
+	}
+
 }
 
 @media screen and ( max-width: 350px ){

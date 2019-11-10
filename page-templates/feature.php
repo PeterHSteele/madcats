@@ -13,7 +13,6 @@ get_header( 'feature' );
 $url = get_theme_mod( 'madcats-featured-banner' );
 ?>
 <div class="banner" style="background-image: url(<?php echo $url ? esc_url( $url ): ''?>)"><!--.banner-->
-	<div class="banner-text">
 		<?php 
 		//banner heading
 		if ( get_theme_mod( 'banner-heading') ) : 
@@ -25,7 +24,8 @@ $url = get_theme_mod( 'madcats-featured-banner' );
 			<h1><?php echo bloginfo( 'name' ); ?></h1>
 		<?php 
 		endif; 
-		?>
+		?>	
+	<div class="banner-text">
 		<p><?php 
 		//banner text
 		echo esc_html( get_theme_mod( 'banner-text' ) ); ?></p>
